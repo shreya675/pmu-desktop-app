@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PMU Desktop App</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <header class="hero">
+        <div class="hero-copy-wrap">
+          <h1>PMU Configuration</h1>
+        </div>
+        <div class="status-panel">
+          <span id="statusBadge" class="status-badge">Stopped</span>
+          <p id="statusMeta" class="status-meta">PMU engine is idle.</p>
+          <p id="errorBanner" class="error-banner hidden"></p>
+        </div>
+      </header>
+
+      <main class="grid">
+        <section class="card card-form">
+          <div class="section-title">
+            <h2>PMU Identity</h2>
+          </div>
+          <div class="form-grid">
+            <label>
+              PMU Name
+              <input id="pmuName" type="text" />
+            </label>
+            <label>
+              Device ID
+              <input id="pmuId" type="number" min="1" max="65535" />
+            </label>
+            <label>
+              Listen Port
+              <input id="listenPort" type="number" min="1" max="65535" />
+            </label>
+          </div>
+        </section>
+
+        <section class="card card-form">
+          <div class="section-title">
+            <h2>PDC Access</h2>
+          </div>
+          <div class="pdc-list" id="pdcIpList"></div>
+          <div class="button-row compact">
+            <button id="addPdcIpBtn" class="ghost" type="button">Add PDC IP</button>
+          </div>
+        </section>
+
+        <section class="card card-form">
+          <div class="section-title">
+            <h2>Streaming Config</h2>
+          </div>
+          <div class="form-grid single">
+            <label>
+              Data Rate
+              <select id="dataRate">
+                <option value="10">10 fps</option>
+                <option value="25">25 fps</option>
+                <option value="50">50 fps</option>
+                <option value="60">60 fps</option>
+              </select>
+            </label>
+          </div>
+          <div class="channel-groups">
+            <fieldset>
+              <legend>Voltage Phasors</legend>
+              <label><input type="checkbox" value="Va" data-phantype="phasor" /> Va</label>
+              <label><input type="checkbox" value="Vb" data-phantype="phasor" /> Vb</label>
+              <label><input type="checkbox" value="Vc" data-phantype="phasor" /> Vc</label>
+            </fieldset>
+            <fieldset>
+              <legend>Current Phasors</legend>
+              <label><input type="checkbox" value="Ia" data-phantype="phasor" /> Ia</label>
+              <label><input type="checkbox" value="Ib" data-phantype="phasor" /> Ib</label>
+              <label><input type="checkbox" value="Ic" data-phantype="phasor" /> Ic</label>
+            </fieldset>
+            <fieldset>
+              <legend>System Values</legend>
+              <label><input id="frequency" type="checkbox" /> Frequency (f)</label>
+              <label><input id="rocof" type="checkbox" /> ROCOF (df/dt)</label>
+            </fieldset>
+          </div>
+        </section>
+
+        <section class="card card-summary">
+          <div class="section-title">
+            <h2>Configuration Snapshot</h2>
+          </div>
+          <div class="summary-grid">
+            <article class="summary-item">
+              <span>Publish Profile</span>
+              <strong id="profileName">PMU_A</strong>
+            </article>
+            <article class="summary-item">
+              <span>Device ID</span>
+              <strong id="summaryDeviceId">1</strong>
+            </article>
+            <article class="summary-item">
+              <span>Data Rate</span>
+              <strong id="summaryRate">50 fps</strong>
+            </article>
+            <article class="summary-item">
+              <span>Selected Channels</span>
+              <strong id="summaryCount">0 active</strong>
+            </article>
+            <article class="summary-item">
+              <span>Connection Policy</span>
+              <strong id="summaryPolicy">Restricted</strong>
+            </article>
+          </div>
+          <div id="channelSummary" class="chip-list"></div>
+        </section>
+
+        <section class="card card-simulation">
+          <div class="section-title">
+            <h2>Simulation Events</h2>
+          </div>
+          <div class="simulation-grid" id="simulationModes">
+            <button type="button" data-simulation-mode="normal">Normal</button>
+            <button type="button" data-simulation-mode="voltageSag">Voltage Sag</button>
+            <button type="button" data-simulation-mode="currentSpike">Current Spike</button>
+            <button type="button" data-simulation-mode="frequencyDrop">Frequency Drop</button>
+            <button type="button" data-simulation-mode="phaseShift">Phase Shift</button>
+            <button type="button" data-simulation-mode="noisySignal">Noisy Signal</button>
+          </div>
+        </section>
+
+        <section class="card card-metrics">
+          <div class="section-title">
+            <h2>Runtime Status</h2>
+          </div>
+          <div class="metric-grid">
+            <article class="metric">
+              <span>Engine</span>
+              <strong id="engineState">Stopped</strong>
+            </article>
+            <article class="metric">
+              <span>Device ID</span>
+              <strong id="engineDeviceId">--</strong>
+            </article>
+            <article class="metric">
+              <span>Listening Port</span>
+              <strong id="enginePort">--</strong>
+            </article>
+            <article class="metric">
+              <span>Allowed PDCs</span>
+              <strong id="engineAllowedIp">--</strong>
+            </article>
+            <article class="metric">
+              <span>Connected PDCs</span>
+              <strong id="engineClientIp">--</strong>
+            </article>
+          </div>
+        </section>
+
+        <section class="card card-table">
+          <div class="section-title">
+            <h2>Controls</h2>
+          </div>
+          <div class="button-row">
+            <button id="saveBtn" type="button">Save Settings</button>
+            <button id="startBtn" type="button">Start PMU</button>
+            <button id="applyBtn" type="button">Apply Changes</button>
+            <button id="stopBtn" class="ghost" type="button">Stop PMU</button>
+          </div>
+        </section>
+
+        <section class="card card-table">
+          <div class="section-title">
+            <h2>Event Log</h2>
+          </div>
+          <div id="eventLog" class="event-log"></div>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="./app.mjs"></script>
+  </body>
+</html>
