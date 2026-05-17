@@ -8,7 +8,7 @@ A desktop-based PMU simulator built using Electron and Node.js for testing IEEE 
 - Shreya Jaiswal  
 
 ## Guide
-- Bibhu Prasad
+- Dr. Bibhu Prasad Padhy
 ---
 
 # Features
