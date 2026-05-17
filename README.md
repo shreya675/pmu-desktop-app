@@ -1,31 +1,39 @@
 # PMU Desktop App
 
-A desktop-based PMU simulator built using Electron and Node.js for testing IEEE C37.118 communication with a PDC. The app allows users to configure PMU settings, control streaming, monitor runtime activity, and simulate different signal conditions.
+A desktop-based PMU simulator built using Electron and Node.js for testing IEEE C37.118 communication with a PDC. The application allows users to configure PMU settings, stream simulated data, monitor runtime activity, and test different signal conditions.
 
 ---
 
 # Features
 
-- PMU simulation over TCP
+- IEEE C37.118 style PMU simulation
 - Configurable Device ID and port
 - PDC IP access control
 - Real-time streaming
-- Multiple signal simulation modes
+- Multiple simulation modes
 - Runtime status and event logging
 - Persistent configuration storage
 
 ---
 
-# Run the Application
+# Download
 
-## From Source
+Download the latest Windows release from:
+
+https://github.com/shreya675/pmu-desktop-app/releases
+
+---
+
+# Run From Source
 
 ```bash
 npm install
 npm start
 ```
 
-## Build Windows Application
+---
+
+# Build the Application
 
 ```bash
 npm run package
@@ -34,18 +42,18 @@ npm run package
 Packaged files will be generated inside:
 
 ```text
-dist/win-unpacked/
+dist/
 ```
 
 ---
 
 # Basic Usage
 
-1. Open the app
+1. Open the application
 2. Configure:
    - PMU Name
    - Device ID
-   - Port
+   - Listening Port
    - Allowed PDC IPs
 3. Select streaming channels and data rate
 4. Click **Start PMU**
@@ -65,7 +73,7 @@ For local testing:
 
 | Button | Function |
 |---|---|
-| Save Settings | Saves configuration only |
+| Save Settings | Saves configuration |
 | Start PMU | Starts the PMU |
 | Apply Changes | Applies changes while running |
 | Stop PMU | Stops the PMU |
@@ -98,24 +106,6 @@ For local testing:
 
 ---
 
-# Project Structure
-
-```text
-electron/
-src/
-package.json
-README.md
-```
-
-Main source files:
-
-```text
-electron/main.mjs
-src/core/pmu-engine.mjs
-src/core/protocol.mjs
-src/ui/app.mjs
-```
-
 ---
 
 # Technologies Used
@@ -124,4 +114,9 @@ src/ui/app.mjs
 - Node.js
 - HTML/CSS/JavaScript
 - TCP Networking
-```
+
+---
+
+# License
+
+This project is licensed under the GNU GPL v3.0 License.
