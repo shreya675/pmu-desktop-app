@@ -3,6 +3,13 @@
 A desktop-based PMU simulator built using Electron and Node.js for testing IEEE C37.118 communication with a PDC. The application allows users to configure PMU settings, stream simulated data, monitor runtime activity, and test different signal conditions.
 
 ---
+## Authors
+- Aayushi Jindal  
+- Shreya Jaiswal  
+
+## Guide
+- Bibhu Prasad
+---
 
 # Features
 
